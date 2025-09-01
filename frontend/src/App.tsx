@@ -1,3 +1,4 @@
+// src/App.tsx
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -29,10 +30,8 @@ export default function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
 
-          
               <Route path="/" element={<Home />} />
 
-        
               <Route
                 path="/events"
                 element={
@@ -58,7 +57,6 @@ export default function App() {
                 }
               />
 
-              {/* Home أو Login */}
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </main>

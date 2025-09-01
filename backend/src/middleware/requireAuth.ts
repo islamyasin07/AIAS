@@ -1,27 +1,24 @@
-// src/middleware/requireAuth.ts
 import { Request, Response, NextFunction } from "express";
 import admin from "firebase-admin";
-import { db } from "../config/firebase"; 
 
-export async function requireAuth(req: Request, res: Response, next: NextFunction) {
+export interface AuthedRequest extends Request {
+  user?: admin.auth.DecodedIdToken;
+}
+
+export async function requireAuth(req: AuthedRequest, res: Response, next: NextFunction) {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(401).json({ error: "NO_TOKEN" });
+      return res.status(401).json({ error: "Missing or invalid Authorization header" });
     }
 
-    const idToken = authHeader.split(" ")[1];
-    const decoded = await admin.auth().verifyIdToken(idToken);
-    (req as any).uid = decoded.uid;
-    const snap = await db.collection("users").doc(decoded.uid).get();
-    const userDoc = snap.exists ? snap.data() : null;
+    const token = authHeader.split(" ")[1];
+    const decoded = await admin.auth().verifyIdToken(token);
 
-    (req as any).userDoc = userDoc; 
-    (req as any).user = decoded;    
-
+    req.user = decoded;
     next();
-  } catch (e: any) {
-    console.error("Auth error:", e.message);
-    return res.status(401).json({ error: "INVALID_TOKEN" });
+  } catch (err: any) {
+    console.error("requireAuth error:", err.message);
+    res.status(401).json({ error: "Unauthorized" });
   }
 }

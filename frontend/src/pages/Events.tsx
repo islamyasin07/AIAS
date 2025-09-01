@@ -105,7 +105,6 @@ export default function Events() {
     <div style={{ padding: "0 14px 24px" }}>
       <SectionHeader title="Events" hint="سجّل وشارك" />
 
-      {/* Filters */}
       <div
         style={{
           display: "flex",

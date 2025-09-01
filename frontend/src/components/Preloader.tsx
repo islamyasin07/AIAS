@@ -88,10 +88,10 @@ export default function Preloader() {
           Loading…
         </p>
 
-        {/* مشغل الصوت */}
+       
         <audio ref={audioRef} src="/juicewrld.mp3" loop preload="auto" muted />
 
-        {/* زر التحكم بالموسيقى */}
+   
         <button
           onClick={toggleMusic}
           style={{

@@ -1,4 +1,3 @@
-// src/pages/Resources.tsx
 import { useEffect, useMemo, useState } from "react";
 import SectionHeader from "../components/SectionHeader";
 import SkeletonCard from "../components/SkeletonCard";
@@ -62,7 +61,6 @@ export default function Resources() {
     <div style={{ padding: "0 14px 24px" }}>
       <SectionHeader title="Resources" hint="ابحث وتصفّح حسب النوع والتصنيف" />
 
-      {/* Filters */}
       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "space-between", margin: "0 14px 14px" }}>
         <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
           <input
